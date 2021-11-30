@@ -47,12 +47,39 @@
               </div>
             </div>
             @endif
-            @error('receiver_id') <span class="text-danger">{{ $message }}</span> @enderror
+            {{-- @error('receiver_id') <span class="text-danger">{{ $message }}</span> @enderror --}}
           </div>
 
           <div class="box-body">
             <div class="chat-box-one" style="overflow: hidden; width: auto; height: 550px;">
+              @if(filled($allmessages))
+              @foreach($allmessages as $allmessage)
               <div class="card d-inline-block mb-3 float-start me-5 no-shadow bg-lighter max-w-p80">
+                <div class="position-absolute pt-1 pe-5 r-0">
+                  <span class="text-muted">09:25</span>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex flex-row pb-2">
+                    <a class="d-flex" href="#">
+                      <img alt="Profile" src="{{asset('frontend/images/avatar/1.jpg')}}" class="avatar me-10">
+                    </a>
+                    <div class="d-flex flex-grow-1">
+                      <div class="m-2 ps-0 align-self-center d-flex flex-column flex-lg-row justify-content-between">
+                        <div>
+                          <p class="mb-0 fs-16 text-dark">Sarah Kortney</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chat-text-left ps-55">
+                    <p class="mb-0">{{$allmessage->message}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              @endforeach
+              @endif
+              {{-- <div class="card d-inline-block mb-3 float-start me-5 no-shadow bg-lighter max-w-p80">
                 <div class="position-absolute pt-1 pe-5 r-0">
                   <span class="text-muted">09:25</span>
                 </div>
@@ -96,31 +123,8 @@
                     <p class="mb-0">I would suggest you discuss this further with the advertising team.</p>
                   </div>
                 </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="card d-inline-block mb-3 float-end me-5 bg-primary max-w-p80">
-                <div class="position-absolute pt-1 ps-5 l-0">
-                  <span>09:41</span>
-                </div>
-                <div class="card-body">
-                  <div class="d-flex flex-row pb-2">
-                    <div class="d-flex flex-grow-1 justify-content-end">
-                      <div class="m-2 ps-0 align-self-center d-flex flex-column flex-lg-row justify-content-between">
-                        <div>
-                          <p class="mb-0 fs-16">Mimi Carreira</p>
-                        </div>
-                      </div>
-                    </div>
-                    <a class="d-flex" href="#">
-                      <img alt="Profile" src="{{asset('frontend/images/avatar/2.jpg')}}" class="avatar ml-10">
-                    </a>
-                  </div>
-                  <div class="chat-text-left pe-50">
-                    <p class="mb-0">I am very busy at the moment and on top of everything, I forgot my umbrella today.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </div> --}}
+              
             </div>
 
           </div>

@@ -2,8 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Requests\Message as RequestsMessage;
-use App\Http\Requests\MessageRequest;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -14,19 +12,21 @@ class Messages extends Component
     public $sender;
     public $message;
     public $receiver_id;
+    public $allmessages;
 
     protected $rules = [
         'message' => 'required',
-        'receiver_id' => 'required',
+        // 'receiver_id' => 'required',
     ];
     protected $messages = [
         'message.required' => 'Enter Your Message.',
-        'receiver_id.required' => 'Please Select A Receiver.',
+        // 'receiver_id.required' => 'Please Select A Receiver.',
     ];
     public function render()
     {
         $data['users'] = User::all();
         $data['sender']=$this->sender;
+        $this->allmessages;
         return view('livewire.messages',$data);
     }
 
@@ -52,6 +52,11 @@ class Messages extends Component
     {
         $user = User::find($userId);
         $this->sender = $user;
+        $this->allmessages = Message::where('user_id',Auth::id())
+        ->where('receiver_id',$userId)
+        ->orWhere('user_id',$userId)
+        ->where('receiver_id',Auth::id())
+        ->orderBy('id','desc')->get();
     }
 
     
