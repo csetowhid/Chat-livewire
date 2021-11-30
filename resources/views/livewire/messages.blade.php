@@ -12,7 +12,7 @@
           <div class="box-body px-0">
             <div class="notification-side">
               @foreach ($users as $user)
-              <a wire:click="getUser({{$user->id}})" class="hover-primary">
+              <a wire:click="getUser({{$user->id}})" class="hover-primary" style="cursor: pointer">
                 <span class="avatar avatar-sm status-success"></span>
                 <strong>{{$user->name}}</strong>
               </a> <br>
@@ -32,26 +32,22 @@
       <div class="col-lg-9 col-12">
         <div class="box">
           <div class="box-header">
+            @if (isset($sender))
             <div class="media align-items-top p-0">
-              <a class="avatar avatar-lg status-success mx-0" href="#">
+              <span class="avatar avatar-lg status-success mx-0">
                 <img src="{{asset('frontend/images/avatar/2.jpg')}}" class="rounded-circle" alt="...">
-              </a>
+              </span>
               <div class="d-lg-flex d-block justify-content-between align-items-center w-p100">
                 <div class="media-body mb-lg-0 mb-20">
-                  @if (isset($sender))
                   <p class="fs-16">
                     <a class="hover-primary" href="#"><strong>{{$sender->name}}</strong></a>
                   </p>
                   <p class="fs-12">Last Seen 10:30pm ago</p>
-                  @endif
-                  {{-- <p class="fs-16">
-                    <a class="hover-primary" href="#"><strong>Theron Trump</strong></a>
-                  </p>
-                  <p class="fs-12">Last Seen 10:30pm ago</p> --}}
                 </div>
-
               </div>
             </div>
+            @endif
+            @error('receiver_id') <span class="text-danger">{{ $message }}</span> @enderror
           </div>
 
           <div class="box-body">
@@ -129,9 +125,9 @@
 
           </div>
           <div class="box-footer">
-            <form id="message_form">
+            <form wire:submit.prevent="sendMessage">
               <div class="d-md-flex d-block justify-content-between align-items-center">
-                <input class="form-control b-0 py-10" type="text" id="message_input" placeholder="Say something..."
+                <input class="form-control b-0 py-10" type="text" wire:model="message" placeholder="Say something..."
                   autocomplete="off">
                 <div class="d-flex justify-content-between align-items-center mt-md-0 mt-30">
                   <button type="submit" class="waves-effect waves-circle btn btn-circle btn-primary">
@@ -140,6 +136,7 @@
                 </div>
               </div>
             </form>
+            @error('message') <span class="text-danger">{{ $message }}</span> @enderror
           </div>
         </div>
       </div>
