@@ -1,4 +1,6 @@
 @extends('users.layouts.app')
 @section('content')
-    @livewire('messages')
+    <div>
+        @livewire('messages')
+    </div>
 @endsection

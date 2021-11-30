@@ -17,6 +17,7 @@
 	<!-- Style-->  
 	<link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('frontend/css/skin_color.css')}}">
+	@livewireStyles
   </head>
 
 <body class="hold-transition light-skin theme-primary fixed sidebar-collapse">
@@ -89,6 +90,7 @@
 	<!-- Chat-Bot Admin App -->
 	<script src="{{asset('frontend/js/template.js')}}"></script>
 	<script src="{{asset('frontend/js/pages/dashboard.js')}}"></script>
+	@livewireScripts
 	@yield('script')
 </body>
 </html>
