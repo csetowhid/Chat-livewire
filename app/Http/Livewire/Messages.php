@@ -30,6 +30,16 @@ class Messages extends Component
         return view('livewire.messages',$data);
     }
 
+    public function mountdata()
+    {
+        if(isset($this->sender->id))
+        {
+              $this->allmessages=Message::where('user_id',auth()->id())->where('receiver_id',$this->sender->id)->orWhere('user_id',$this->sender->id)->where('receiver_id',auth()->id())->orderBy('id','desc')->get();
+        }
+
+    }
+
+
     public function resetForm()
     {
         $this->message='';
@@ -52,11 +62,7 @@ class Messages extends Component
     {
         $user = User::find($userId);
         $this->sender = $user;
-        $this->allmessages = Message::where('user_id',Auth::id())
-        ->where('receiver_id',$userId)
-        ->orWhere('user_id',$userId)
-        ->where('receiver_id',Auth::id())
-        ->orderBy('id','desc')->get();
+        $this->allmessages=Message::where('user_id',auth()->id())->where('receiver_id',$userId)->orWhere('user_id',$userId)->where('receiver_id',auth()->id())->orderBy('id','desc')->get();
     }
 
     
