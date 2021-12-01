@@ -34,7 +34,7 @@ class Messages extends Component
     {
         if(isset($this->sender->id))
         {
-              $this->allmessages=Message::where('user_id',auth()->id())->where('receiver_id',$this->sender->id)->orWhere('user_id',$this->sender->id)->where('receiver_id', Auth::id())->orderBy('id','desc')->get();
+              $this->allmessages=Message::where('user_id',Auth::id())->where('receiver_id',$this->sender->id)->orWhere('user_id',$this->sender->id)->where('receiver_id', Auth::id())->orderBy('id','desc')->get();
               $not_seen= Message::where('user_id',$this->sender->id)->where('receiver_id', Auth::id());
               $not_seen->update(['is_seen'=> true]);
         }
