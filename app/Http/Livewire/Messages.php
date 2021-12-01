@@ -63,7 +63,7 @@ class Messages extends Component
     {
         $user = User::find($userId);
         $this->sender = $user;
-        $this->allmessages=Message::where('user_id',auth()->id())->where('receiver_id',$userId)->orWhere('user_id',$userId)->where('receiver_id',auth()->id())->orderBy('id','desc')->get();
+        $this->allmessages=Message::where('user_id',Auth::id())->where('receiver_id',$userId)->orWhere('user_id',$userId)->where('receiver_id',Auth::id())->orderBy('id','desc')->get();
     }
 
     

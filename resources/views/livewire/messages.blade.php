@@ -85,7 +85,7 @@
               @else  
               <div class="card d-inline-block mb-3 float-start me-5 no-shadow bg-lighter max-w-p80">
                 <div class="position-absolute pt-1 pe-5 r-0">
-                  <span class="text-muted">{{$allmessage->created_at}}</span>
+                  <span class="text-muted">{{$allmessage->created_at->format('y-m-d')}}</span>
                 </div>
                 <div class="card-body">
                   <div class="d-flex flex-row pb-2">
