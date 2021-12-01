@@ -13,19 +13,23 @@
           <div class="box-body px-0">
             <div class="notification-side">
               @foreach ($users as $user)
+              @if($user->id !== Auth::id())
+              @php
+                  $not_seen=App\Models\Message::where('user_id',$user->id)->where('receiver_id',Auth::id())->where('is_seen',false)->get() ?? null
+              @endphp
               <a wire:click="getUser({{$user->id}})" class="hover-primary" style="cursor: pointer">
+                @if($user->is_online==true)
                 <span class="avatar avatar-sm status-success"></span>
+                @endif
                 <strong>{{$user->name}}</strong>
-              </a> <br>
+              </a>
+              @if(filled($not_seen))
+                  <div class="badge badge-success rounded-circle"> {{ $not_seen->count()}} </div>
+              @endif
+
+              <br>
+              @endif
               @endforeach
-              {{-- <a class="hover-primary" href="#">
-                <span class="avatar avatar-sm status-success"></span>
-                <strong>News</strong>
-              </a> <br>
-              <a class="hover-primary" href="#">
-                <span class="avatar avatar-sm status-success"></span>
-                <strong>Blog</strong>
-              </a> --}}
             </div>
           </div>
         </div>
